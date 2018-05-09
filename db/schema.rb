@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180509055342) do
+ActiveRecord::Schema.define(version: 20180509062554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "locations", force: :cascade do |t|
+    t.bigint "weather_id"
+    t.string "city"
+    t.string "country"
+    t.string "region"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["weather_id"], name: "index_locations_on_weather_id"
+  end
 
   create_table "weathers", force: :cascade do |t|
     t.string "title", comment: "Page Title"
@@ -21,4 +31,5 @@ ActiveRecord::Schema.define(version: 20180509055342) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "locations", "weathers"
 end
