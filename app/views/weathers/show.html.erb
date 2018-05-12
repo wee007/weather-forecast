@@ -1,5 +1,5 @@
-<% if @weather %>
-  <p><%= @weather %></p>
+<% if @weather.present? %>
+  <%= render partial: "weather" %>
 <% else %>
-  <p><%= flash[:error] %></p>
+  <div class="alert alert-danger" role="alert"><%= flash[:error] %></div>
 <% end %>

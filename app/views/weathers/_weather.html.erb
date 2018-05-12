@@ -1,0 +1,64 @@
+<% content_for :title, @weather["title"] %>
+<div class="row">
+  <div class="col">
+    <h2><%= @weather.dig("location", "city") %>, <%= @weather.dig("location", "country") %></h2>
+    <p><%= @weather["lastBuildDate"] %></p>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Current Condition</h5>
+        <p class="card-text"><%= @weather.dig("item", "condition", "text") %></p>
+        <p class="card-text">
+          <%= fa_icon "arrow-up" %> <%= @weather.dig("item", "forecast").first["high"] rescue nil %>°<%= @weather.dig("units", "temperature") %>
+          <%= fa_icon "arrow-down" %> <%= @weather.dig("item", "forecast").first["low"] rescue nil %>°<%= @weather.dig("units", "temperature") %>
+        </p>
+        <p class="card-text current_temp"><%= @weather.dig("item", "condition", "temp") %>°<%= @weather.dig("units", "temperature") %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Forecast - 10 days</h5>
+            <p class="card-text">
+              <% if @weather.dig("item", "forecast").present? %>
+                <ul class="list-group list-group-flush">
+                  <% @weather.dig("item", "forecast").each do |forecast| %>
+                    <li class="list-group-item">
+                      <%= forecast["day"] %>
+                      <%= forecast["text"] %>
+                      <%= fa_icon "arrow-up" %> <%= forecast["high"] %>°<%= @weather.dig("units", "temperature") %>
+                      <%= fa_icon "arrow-down" %> <%= forecast["low"] %>°<%= @weather.dig("units", "temperature") %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Details</h5>
+            <p class="card-text">Humidity <%= @weather.dig("atmosphere", "humidity") %>%</p>
+            <p class="card-text">Visibility <%= @weather.dig("atmosphere", "visibility") %> <%= @weather.dig("units", "distance") %></p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Wind & Pressure</h5>
+            <p class="card-text">Wind <%= @weather.dig("wind", "speed") %> <%= @weather.dig("units", "speed") %> <%= @weather.dig("wind", "direction") %>°</p>
+            <p class="card-text">Barometer <%= @weather.dig("atmosphere", "pressure") %> <%= @weather.dig("units", "pressure") %></p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Sun & Moon</h5>
+            <p class="card-text">Sunrise <%= @weather.dig("astronomy", "sunrise") %></p>
+            <p class="card-text">Sunset <%= @weather.dig("astronomy", "sunset") %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
