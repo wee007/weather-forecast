@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WeatherForecast</title>
+    <title>Weather Forecast</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,9 @@
   </head>
 
   <body>
+    <%= link_to "Home", root_path %>
+    <%= link_to "Sydney", weather_path('sydney'), method: :post %>
+    <%= link_to "Melbourne", weather_path('melbourne'), method: :post %>
     <%= yield %>
   </body>
 </html>
