@@ -1,1 +1,10 @@
-<p>Welcome to the Weather Forecast!</p>
+<div class="row">
+  <div class="col">
+    <h2>Welcome to the Weather Forecast!</h2>
+    <p>
+      Locations:
+      <%= link_to "Sydney", weather_path('sydney'), method: :post %>
+      <%= link_to "Melbourne", weather_path('melbourne'), method: :post %>
+    </p>
+  </div>
+</div>
